@@ -1,13 +1,14 @@
 import os, io
 from google.cloud import vision
 from google.cloud.vision_v1 import types
+from spellchecker import SpellChecker
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'My First Project-194ff9610555.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'pleasedontmine.json'
 
 client = vision.ImageAnnotatorClient()
 
 FOLDER_PATH = os.getcwd()+ '\\Images'
-IMAGE_FILE = 'handwriting1.jpeg'
+IMAGE_FILE = 'handwritten2.jpg'
 FILE_PATH = os.path.join(FOLDER_PATH, IMAGE_FILE)
 
 with io.open(FILE_PATH, 'rb') as image_file:
@@ -16,5 +17,15 @@ with io.open(FILE_PATH, 'rb') as image_file:
 image = vision.Image(content=content)
 response = client.document_text_detection(image=image)
 docText = response.full_text_annotation.text
-print(docText)
 
+text = docText.lower().replace(',', '').replace('--', ' ').replace('-', ' ').replace(':', '').replace(';', '').replace('? ', '.').replace('!', '.').replace('\n', ' ').split()
+
+spell = SpellChecker()
+OPTIONS = {}
+for word in text:
+    if word != spell.correction(word):
+        OPTIONS[word] = spell.correction(word)
+
+print(OPTIONS)
+
+        
