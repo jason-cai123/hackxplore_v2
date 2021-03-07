@@ -19,27 +19,32 @@ def get_handwritten(filename):
     image = vision.Image(content=content)
     response = client.document_text_detection(image=image)
     docText = response.full_text_annotation.text
-    
-    print(docText)
 
     text = docText.lower().replace('.', '').replace('(', '').replace(')', '').replace(',', '').replace('--', ' ').replace('-', ' ').replace(':', '').replace(';', '').replace('? ', '.').replace('!', '.').replace('\n', ' ').split()
-    print(text)
 
+    return(text)
+
+def autocorrect(text):
     spell = SpellChecker()
     corrections = {}
 
-    print(spell.unknown(text))
     for flagged_word in spell.unknown(text):
         word = Word(flagged_word)
         choices = []
+        
+        print(flagged_word)
+        print(word.spellcheck())
         for choice in word.spellcheck():
-            if choice[1] > 0.05 and len(choices) <= 4:
+            if choice[1] > 0.05 and len(choices) <= 4 and flagged_word != choice[0]:
                 choices.append(choice[0])
 
         if len(choices) > 0:
             corrections[flagged_word] = choices
         
     return corrections
-    
+
+def contstory(text):
+
+
 if __name__ == "__main__":
     get_handwritten()
