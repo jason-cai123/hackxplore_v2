@@ -59,8 +59,8 @@ def upload():
             file.save(PATH)
             print(filename, file=sys.stderr)
 
-            sentence = get_sentence(filename)
-            print(sentence, file=sys.stderr)
+            #sentence = get_sentence(filename)
+            #print(sentence, file=sys.stderr)
 
             '''
             for word,options in corrections.items():
@@ -68,7 +68,7 @@ def upload():
             '''
 
             photo = filename
-            print(photo)
+            #print(photo)
             #photo = redirect(url_for('uploaded_file', filename=filename))
 
             #return handwritten

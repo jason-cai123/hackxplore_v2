@@ -50,15 +50,14 @@
                         <p>
                         <span class=wrong style="color:red">{{ word[0] }}</span>
                         {% for suggestion in word[1] %}
-                        <div id="suggestion-button" class="ui blue green button"><a>{{ suggestion }}</a></div>
+                            <div id="suggestion-button" class="ui blue green button"><a>{{ suggestion }}</a></div>
                         {% endfor %}
                         </p>
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
-        
-        
+
     </body>
 </html>
 
