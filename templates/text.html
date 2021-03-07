@@ -10,21 +10,49 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     </head>
     <body>
-        <h1> </h1>
-        <h1>text</h1>
+        <div>
+            <h1>text</h1>
+        </div>>
 
         <div>
-            <img src={{ photo }} alt="Handwritten Text" width=300 height=400>
+            <img src={{ photo }} alt="Handwritten Text" width=225 height=300>
         </div>  
         
         <div id="sentence" class="sentence">
             <div class="ui segment">
+                <h3 id = sentence-header class="ui header" style="text-align:center">
+                    <i class="pencil alternate icon"></i>
+                    <div class="content" style="text-align:center">
+                      Your Sentence:
+                    </div>
+                </h3>
                 {% for word in writing %}
                     {% if word[1] == None %}
                         <span class=correct style="color:black">{{ word[0] }}</span>
                     {% endif %}
                     {% if word[1] != None %}
                         <span class=wrong style="color:red">{{ word[0] }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="sentence" class="sentence">
+            <div class="ui segment">
+                <h3 id = sentence-header class="ui header" style="text-align:center">
+                    <i class="times icon"></i>
+                    <div class="content" style="text-align:center">
+                      Spelling Corrections:
+                    </div>
+                </h3>
+                {% for word in writing %}
+                    {% if word[1] != None %}
+                        <p>
+                        <span class=wrong style="color:red">{{ word[0] }}</span>
+                        {% for suggestion in word[1] %}
+                        <div id="suggestion-button" class="ui blue green button"><a>{{ suggestion }}</a></div>
+                        {% endfor %}
+                        </p>
                     {% endif %}
                 {% endfor %}
             </div>

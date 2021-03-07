@@ -23,3 +23,13 @@ body {
 .green {
     color: green;
 }
+
+#sentence-header {
+    text-align: center;
+    float: center;
+}
+
+.content {
+    text-align: center;
+    float: center;
+}
