@@ -20,6 +20,9 @@ def get_handwritten(filename):
     response = client.document_text_detection(image=image)
     docText = response.full_text_annotation.text
 
+    return docText
+
+def get_corrections(docText):
     text = docText.lower().replace('.', '').replace('(', '').replace(')', '').replace(',', '').replace('--', ' ').replace('-', ' ').replace(':', '').replace(';', '').replace('? ', '.').replace('!', '.').replace('\n', ' ').split()
     print(text)
 
