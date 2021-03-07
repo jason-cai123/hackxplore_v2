@@ -42,8 +42,7 @@ def upload():
             print(handwritten, file=sys.stderr)
 
             return handwritten
-           
-            
+        
         #return redirect(url_for('uploaded_file',
                                # filename=filename))
     return render_template("upload.html")
