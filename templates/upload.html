@@ -1,11 +1,19 @@
 <!-- Predict Page -->
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="../static/css/upload.css">
+  <head>
+    <div id="home-button" class="ui blue basic button"><a href="/">HOME</a></div>
     <title>Upload new File</title>
-    <h1>Upload new File</h1>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/upload.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  </head>
+  <body>
+    <h1> </h1>
+    <h1 id="file-upload">Upload new File</h1>
     <form method='post' enctype='multipart/form-data'>
       <input type='file' name='file', accept=".jpg, .jpeg">
       <input type='submit' value='Upload'>
     </form>
+  </body>
 </html>

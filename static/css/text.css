@@ -1,4 +1,17 @@
 body {
     text-align: center;
-    background-color: #add8e6;
+    /*background-color: #add8e6;*/
+}
+
+#home-button {
+    float: right;
+    width: 70px;
+    padding: 10px;
+    margin: 20px;
+}
+
+#upload-button {
+    float: right;
+    width: 100px;
+    padding: 10px;
 }

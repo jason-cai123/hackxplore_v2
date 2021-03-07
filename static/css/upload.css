@@ -1,4 +1,19 @@
-h1, form, body {
+form {
     text-align: center;
-    background-color: #add8e6;
+   /* background-color: #add8e6;*/
 }
+
+#file-upload {
+    text-align: center;
+    float: center;
+}
+
+#home-button {
+    float: right;
+    width: 70px;
+    padding: 10px;
+    margin: 20px;
+}
+
+
+
