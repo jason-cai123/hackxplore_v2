@@ -4,7 +4,7 @@ from google.cloud.vision_v1 import types
 from spellchecker import SpellChecker
 from textblob import Word
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'pleasedontmine.json'
+#os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'pleasedontmine.json'
 
 def get_handwritten(filename):
     client = vision.ImageAnnotatorClient()  
