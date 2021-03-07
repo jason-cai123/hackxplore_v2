@@ -1,5 +1,5 @@
 import os, io
-from google.cloud import vision
+from google.cloud import vision, texttospeech
 from google.cloud.vision_v1 import types
 from spellchecker import SpellChecker
 from textblob import Word
@@ -20,9 +20,6 @@ def get_handwritten(filename):
     response = client.document_text_detection(image=image)
     docText = response.full_text_annotation.text
 
-    return docText
-
-def get_corrections(docText):
     text = docText.lower().replace('.', '').replace('(', '').replace(')', '').replace(',', '').replace('--', ' ').replace('-', ' ').replace(':', '').replace(';', '').replace('? ', '.').replace('!', '.').replace('\n', ' ').split()
 
     return(text)
@@ -46,8 +43,18 @@ def autocorrect(text):
         
     return corrections
 
-def contstory(text):
+def speech(options):
+    phrase = "........ , ........ , ........ , ........ , ........ ".join(options)
+
+    client = texttospeech.TextToSpeechClient()
+
+    synthesis_input = texttospeech.SynthesisInput(text=phrase)
+    voice = texttospeech.VoiceSelectionParams(language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL)
+    audio_config = texttospeech.AudioConfig(audio_encoding=texttospeech.AudioEncoding.MP3)
+    response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
+
+    with open("output.mp3", "wb") as out:
+        out.write(response.audio_content)
 
 
-if __name__ == "__main__":
-    get_handwritten()
+    
