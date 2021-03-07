@@ -41,11 +41,16 @@ def upload():
             handwritten = get_handwritten(filename)
             print(handwritten, file=sys.stderr)
 
-            return handwritten
-        
+            #return handwritten
+           
+        return redirect(url_for('text', writing=handwritten))
         #return redirect(url_for('uploaded_file',
                                # filename=filename))
     return render_template("upload.html")
+
+@app.route('/text/<string:writing>', methods=['POST', 'GET'])
+def text(writing):
+    return render_template("text.html", writing=writing)
 
 if __name__ == '__main__':
     app.run()
