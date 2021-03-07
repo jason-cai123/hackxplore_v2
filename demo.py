@@ -33,7 +33,7 @@ def get_corrections(text):
         choices = []
         
         for choice in word.spellcheck():
-            if choice[1] > 0.05 and len(choices) <= 4 and flagged_word != choice[0]:
+            if choice[1] > 0.01 and len(choices) <= 4 and flagged_word != choice[0]:
                 choices.append(choice[0])
 
         if len(choices) > 0:
