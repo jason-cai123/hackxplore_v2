@@ -1,4 +1,4 @@
-import os, io
+import os, io, glob
 from google.cloud import vision, texttospeech
 from google.cloud.vision_v1 import types
 from spellchecker import SpellChecker
@@ -41,21 +41,21 @@ def get_corrections(text):
     return corrections
 
 def get_speech(output_name, options):
-    phrase = "........ , ........ , ........ , ........ , ........ ".join(options)
-
+    FOLDER_PATH = os.getcwd() + '/Audio'
     client = texttospeech.TextToSpeechClient()
 
-    FOLDER_PATH = os.getcwd() + '/Audio'
-    AUDIO_FILE = output_name + '.mp3'
-    FILE_PATH = os.path.join(FOLDER_PATH, AUDIO_FILE)
+    for i in range(len(options)):
+        AUDIO_FILE = output_name + str(i) +'.mp3'
+        FILE_PATH = os.path.join(FOLDER_PATH, AUDIO_FILE)
 
-    synthesis_input = texttospeech.SynthesisInput(text=phrase)
-    voice = texttospeech.VoiceSelectionParams(language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL)
-    audio_config = texttospeech.AudioConfig(audio_encoding=texttospeech.AudioEncoding.MP3)
-    response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
+        synthesis_input = texttospeech.SynthesisInput(text=options[i])
+        voice = texttospeech.VoiceSelectionParams(language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL)
+        audio_config = texttospeech.AudioConfig(audio_encoding=texttospeech.AudioEncoding.MP3)
+        response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
 
-    with open(FILE_PATH, "wb") as out:
-        out.write(response.audio_content)
+        with open(FILE_PATH, "wb") as out:
+            out.write(response.audio_content)
 
-
+if __name__ == "__main__":
+    get_speech("helo", ["halo","hello", "hell"])
     
