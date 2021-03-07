@@ -1,6 +1,6 @@
-body {
+head, body {
     text-align: center;
-    /*background-color: #add8e6;*/
+    background: rgba(4, 92, 4, 0.5);
 }
 
 #home-button {
@@ -14,6 +14,7 @@ body {
     float: right;
     width: 100px;
     padding: 10px;
+    margin: 20px;
 }
 
 .blue {
@@ -32,4 +33,10 @@ body {
 .content {
     text-align: center;
     float: center;
+}
+
+#photo {
+    margin: 50px;
+    float: center;
+    text-align: center;
 }
