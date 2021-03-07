@@ -9,7 +9,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'pleasedontmine.json'
 def get_handwritten(filename):
     client = vision.ImageAnnotatorClient()  
 
-    FOLDER_PATH = os.getcwd()+ '/Images'
+    FOLDER_PATH = os.getcwd()+ '/templates/Images'
     IMAGE_FILE = filename
     FILE_PATH = os.path.join(FOLDER_PATH, IMAGE_FILE)
 
