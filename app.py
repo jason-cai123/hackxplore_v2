@@ -19,6 +19,21 @@ app.config['ALLOWED_EXTENSIONS'] = ['jpg','jpeg']
 def allowed_file(filename):
     return'.' in filename and filename.rsplit('.',1) [1].lower() in app.config['ALLOWED_EXTENSIONS']
 
+def get_sentence(filename):
+    handwritten = get_handwritten(filename)
+    corrections = get_corrections(handwritten)
+    #print(corrections, file=sys.stderr)
+
+    sentence = []
+    for word in handwritten:
+        if corrections.get(word, 0) != 0:
+            sentence.append({word : corrections[word]})
+        else:
+            sentence.append({word : None})
+
+    return sentence
+    
+
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
     if request.method == 'POST':
@@ -38,20 +53,23 @@ def upload():
             file.save(PATH)
             print(filename, file=sys.stderr)
 
-            handwritten = get_handwritten(filename)
-            corrections = get_corrections(handwritten)
-            print(corrections, file=sys.stderr)
+            sentence = get_sentence(filename)
+            print(sentence, file=sys.stderr)
 
+            '''
             for word,options in corrections.items():
                 get_speech(word, options)
+            '''
 
             photo = filename
             print(photo)
             #photo = redirect(url_for('uploaded_file', filename=filename))
 
             #return handwritten
-           
-        return redirect(url_for('text', writing=handwritten, photo=photo))
+
+        
+
+        return redirect(url_for('text', writing=sentence, photo=photo))
         #return redirect(url_for('uploaded_file',
                                # filename=filename))
     return render_template("upload.html")
@@ -72,8 +90,6 @@ def uploaded_file(filename):
 @app.route('/uploads/<filename>')
 def send_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
-
-
 
 if __name__ == '__main__':
     app.run()

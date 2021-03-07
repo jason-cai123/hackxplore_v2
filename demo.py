@@ -38,6 +38,7 @@ def get_corrections(text):
 
         if len(choices) > 0:
             corrections[flagged_word] = choices
+    print(corrections)
     return corrections
 
 def get_speech(output_name, options):
