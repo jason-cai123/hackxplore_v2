@@ -1,19 +1,137 @@
-<!-- Welcome Page -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <title id="title">hackxplore</title>
-        <link rel="stylesheet" type="text/css" href="../static/css/index.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    </head>
-    <body>
-        <h1>hackxplore</h1>
-        <p>welcome</p>
-        <button class="ui blue basic button"><a href="/upload">Let's Go!</a></button>
-        <!--
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right-square-fill" viewBox="0 0 16 16">
-            <path d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM5.904 10.803L10 6.707v2.768a.5.5 0 0 0 1 0V5.5a.5.5 0 0 0-.5-.5H6.525a.5.5 0 1 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 .707.707z"/>
-        </svg>
-        -->
-    </body>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewreport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Unicorn.ai
+    </title>
+	<link href="https://fonts.googleapis.com/css?family=Nova+Round&display=swap" rel="stylesheet" />
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
+			font-family: roboto;
+		}
+		h1, h2, h3, h4, h5, h6{
+			font-family: 'Nova Round', cursive;
+		}
+
+		.wrap{
+			background: rgba(4, 92, 4, 0.5) url(banner.jpg) no-repeat;
+			background-position: center;
+			background-size: cover;
+			min-height: 100vh;
+			overflow: hidden;
+			background-blend-mode: overlay;
+		}
+
+		.wave{
+			position: absolute;
+			width: 100%;
+			bottom: 0px;
+			color: #fff;
+			opacity: 1;
+		}
+
+		header{
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			padding: 25px 80px;
+		}
+
+		header .logo{
+			font-size: 28px;
+			font-weight: 700;
+			color: #fff;
+			float: left;
+			font-family: 'Nova Round', cursive;
+		}
+
+		header .menu{
+			float: right;
+			margin-top: 5px;
+			font-family: 'Nova Round', cursive;
+		}
+
+		header ul li{
+			display: inline-block;
+		}
+
+		header ul li a{
+			text-decoration: none;
+			font-size: 16px;
+			color: #fff;
+			margin: 0 25px;
+			font-weight: 300;
+			letter-spacing: 1px;
+		}
+
+		.content{
+			max-width: 55%;
+			padding: 200px 80px 0;
+			color: #fff;
+		}
+		
+		.content h1{
+			font-size: 48px;
+		}
+
+		.content p{
+			font-size: 25px;
+			padding: 25px 0;
+			font-weight: 300;
+			font-family: 'Nova Round', cursive;
+		}
+
+		.content .btn-group{
+			margin-top: 45px;
+			font-family: 'Nova Round', cursive;
+		}
+		.content a{
+			display: inline-block;
+			padding: 15px 45px;
+			text-decoration: none;
+			color: #fff;
+			border-radius: 50px;
+			font-family: 'Nova Round', cursive;
+		}
+		.content a.color1{
+			background-color: #ffc107;
+		}
+		
+	</style>
+</head>
+<body>
+<div class="wrap">
+	<header>
+		<div class="logo">Unicorn AI</div>
+		<div class="menu">
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="/upload">App</a></li>
+				<li><a href="#">Contact Us</a></li>
+			</ul>
+		</div>
+	</header>
+	<div class="content">
+		<h1>Blah Blah Blah</h1>
+		<p>etce tecetaetjlsdkjfaljdfl</p>
+		<div class="btm-group">
+			<a href="/upload" class="color1">Try it out!</a>
+		</div>
+	</div>
+
+	<svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,160L48,181.3C96,203,192,245,288,229.3C384,213,480,139,576,106.7C672,75,768,85,864,106.7C960,128,1056,160,1152,192C1248,224,1344,256,1392,272L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+
+</div>
+
+
+
+</body>
 </html>

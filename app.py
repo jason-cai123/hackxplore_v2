@@ -58,4 +58,4 @@ def text(writing):
     return render_template("text.html", writing=writing)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
