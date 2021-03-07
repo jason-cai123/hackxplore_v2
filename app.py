@@ -27,10 +27,16 @@ def get_sentence(filename):
     sentence = []
     for word in handwritten:
         if corrections.get(word, 0) != 0:
+            sentence.append([word, corrections[word]])
+        else:
+            sentence.append([word, None])
+    '''
+    for word in handwritten:
+        if corrections.get(word, 0) != 0:
             sentence.append({word : corrections[word]})
         else:
             sentence.append({word : None})
-
+    '''
     return sentence
     
 
@@ -67,16 +73,19 @@ def upload():
 
             #return handwritten
 
-        
+        #return redirect(url_for('text', writing=sentence, photo=photo))
+        return redirect(url_for('text', photo=photo))
 
-        return redirect(url_for('text', writing=sentence, photo=photo))
         #return redirect(url_for('uploaded_file',
                                # filename=filename))
     return render_template("upload.html")
 
-@app.route('/text/<string:writing>/<string:photo>', methods=['POST', 'GET'])
-def text(writing, photo):
+#@app.route('/text/<list:writing>/<string:photo>', methods=['POST', 'GET'])
+#def text(writing, photo):#
+@app.route('/text/<string:photo>', methods=['POST', 'GET'])
+def text(photo):
     #filename = "templates/Images/" + photo
+    writing = get_sentence(photo)
     filename = 'http://127.0.0.1:5000/uploads/' + photo
     return render_template("text.html", writing=writing, photo=filename)
 
