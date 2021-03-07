@@ -1,6 +1,6 @@
 import os, io
 from flask import Flask, jsonify, flash, request, redirect, url_for, render_template, send_from_directory
-from demo import get_handwritten, get_corrections
+from demo import get_handwritten, get_corrections, get_speech
 from werkzeug.utils import secure_filename
 import sys
 
@@ -40,6 +40,10 @@ def upload():
 
             handwritten = get_handwritten(filename)
             corrections = get_corrections(handwritten)
+
+            for word,options in corrections.items():
+                get_speech(word, options)
+
             print(corrections, file=sys.stderr)
 
             #return handwritten

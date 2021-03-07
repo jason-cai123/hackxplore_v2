@@ -24,7 +24,7 @@ def get_handwritten(filename):
 
     return(text)
 
-def autocorrect(text):
+def get_corrections(text):
     spell = SpellChecker()
     corrections = {}
 
@@ -32,30 +32,29 @@ def autocorrect(text):
         word = Word(flagged_word)
         choices = []
         
-        print(flagged_word)
-        print(word.spellcheck())
         for choice in word.spellcheck():
             if choice[1] > 0.05 and len(choices) <= 4 and flagged_word != choice[0]:
                 choices.append(choice[0])
 
         if len(choices) > 0:
             corrections[flagged_word] = choices
-            
-    print(corrections)
-        
     return corrections
 
-def speech(options):
+def get_speech(output_name, options):
     phrase = "........ , ........ , ........ , ........ , ........ ".join(options)
 
     client = texttospeech.TextToSpeechClient()
+
+    FOLDER_PATH = os.getcwd() + '/Audio'
+    AUDIO_FILE = output_name + '.mp3'
+    FILE_PATH = os.path.join(FOLDER_PATH, AUDIO_FILE)
 
     synthesis_input = texttospeech.SynthesisInput(text=phrase)
     voice = texttospeech.VoiceSelectionParams(language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL)
     audio_config = texttospeech.AudioConfig(audio_encoding=texttospeech.AudioEncoding.MP3)
     response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
 
-    with open("output.mp3", "wb") as out:
+    with open(FILE_PATH, "wb") as out:
         out.write(response.audio_content)
 
 
