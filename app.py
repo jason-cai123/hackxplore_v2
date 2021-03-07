@@ -11,13 +11,34 @@ app.config['SECRET_KEY'] = os.urandom(24)
 def index():
     return render_template('index.html')
 
-UPLOAD_FOLDER = os.getcwd()+'/Images'
+UPLOAD_FOLDER = os.getcwd()+'/templates/Images'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.config['ALLOWED_EXTENSIONS'] = ['jpg','jpeg']
 
 def allowed_file(filename):
     return'.' in filename and filename.rsplit('.',1) [1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+def get_sentence(filename):
+    handwritten = get_handwritten(filename)
+    corrections = get_corrections(handwritten)
+    #print(corrections, file=sys.stderr)
+
+    sentence = []
+    for word in handwritten:
+        if corrections.get(word, 0) != 0:
+            sentence.append([word, corrections[word]])
+        else:
+            sentence.append([word, None])
+    '''
+    for word in handwritten:
+        if corrections.get(word, 0) != 0:
+            sentence.append({word : corrections[word]})
+        else:
+            sentence.append({word : None})
+    '''
+    return sentence
+    
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
@@ -38,24 +59,46 @@ def upload():
             file.save(PATH)
             print(filename, file=sys.stderr)
 
-            handwritten = get_handwritten(filename)
-            corrections = get_corrections(handwritten)
+            #sentence = get_sentence(filename)
+            #print(sentence, file=sys.stderr)
 
+            '''
             for word,options in corrections.items():
                 get_speech(word, options)
+            '''
 
-            print(corrections, file=sys.stderr)
+            photo = filename
+            #print(photo)
+            #photo = redirect(url_for('uploaded_file', filename=filename))
 
             #return handwritten
-           
-        return redirect(url_for('text', writing=handwritten))
+
+        #return redirect(url_for('text', writing=sentence, photo=photo))
+        return redirect(url_for('text', photo=photo))
+
         #return redirect(url_for('uploaded_file',
                                # filename=filename))
     return render_template("upload.html")
 
-@app.route('/text/<string:writing>', methods=['POST', 'GET'])
-def text(writing):
-    return render_template("text.html", writing=writing)
+#@app.route('/text/<list:writing>/<string:photo>', methods=['POST', 'GET'])
+#def text(writing, photo):#
+@app.route('/text/<string:photo>', methods=['POST', 'GET'])
+def text(photo):
+    #filename = "templates/Images/" + photo
+    writing = get_sentence(photo)
+    filename = 'http://127.0.0.1:5000/uploads/' + photo
+    return render_template("text.html", writing=writing, photo=filename)
+
+'''
+@app.route('/show/<filename>')
+def uploaded_file(filename):
+    filename = 'http://127.0.0.1:5000/uploads/' + filename
+    return render_template('template.html', filename=filename)
+'''
+
+@app.route('/uploads/<filename>')
+def send_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 if __name__ == '__main__':
     app.run(debug=True)

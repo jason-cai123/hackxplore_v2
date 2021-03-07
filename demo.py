@@ -9,7 +9,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'pleasedontmine.json'
 def get_handwritten(filename):
     client = vision.ImageAnnotatorClient()  
 
-    FOLDER_PATH = os.getcwd()+ '/Images'
+    FOLDER_PATH = os.getcwd()+ '/templates/Images'
     IMAGE_FILE = filename
     FILE_PATH = os.path.join(FOLDER_PATH, IMAGE_FILE)
 
@@ -38,6 +38,7 @@ def get_corrections(text):
 
         if len(choices) > 0:
             corrections[flagged_word] = choices
+    print(corrections)
     return corrections
 
 def get_speech(output_name, options):

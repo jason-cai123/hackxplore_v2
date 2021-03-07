@@ -15,3 +15,21 @@ body {
     width: 100px;
     padding: 10px;
 }
+
+.blue {
+    color: blue;
+}
+
+.green {
+    color: green;
+}
+
+#sentence-header {
+    text-align: center;
+    float: center;
+}
+
+.content {
+    text-align: center;
+    float: center;
+}
