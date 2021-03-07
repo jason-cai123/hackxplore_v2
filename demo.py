@@ -41,6 +41,8 @@ def get_corrections(docText):
 
         if len(choices) > 0:
             corrections[flagged_word] = choices
+            
+    print(corrections)
         
     return corrections
     
